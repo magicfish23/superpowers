@@ -29,6 +29,8 @@ Before defining tasks, map out which files will be created or modified and what 
 - Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.
 - You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.
 - Files that change together should live together. Split by responsibility, not by technical layer.
+- Separate orchestration (domain rules — the *why/when*: auth, state transitions, error classification) from reusable mechanics (the *how*: provider calls, command execution). Keep domain policy in the orchestration layer; shared mechanics take explicit inputs and return structured results rather than reaching into shared state.
+- Extract a shared unit only when an operation is needed by 2+ callers (DRY); logic used once stays inline (YAGNI). When pulling shared logic out of existing code, migrate one caller at a time and verify before the next.
 - In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.
 
 This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
@@ -112,6 +114,7 @@ Every step must contain the actual content an engineer needs. These are **plan f
 - "Similar to Task N" (repeat the code — the engineer may be reading tasks out of order)
 - Steps that describe what to do without showing how (code blocks required for code steps)
 - References to types, functions, or methods not defined in any task
+- Calls to external libraries/SDKs/APIs written from memory instead of verified against the real source or current docs (a hallucinated API name poisons every task built on it)
 
 ## Remember
 - Exact file paths always
