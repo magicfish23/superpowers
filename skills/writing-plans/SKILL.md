@@ -33,6 +33,15 @@ Before defining tasks, map out which files will be created or modified and what 
 - Extract a shared unit only when an operation is needed by 2+ callers (DRY); logic used once stays inline (YAGNI). When pulling shared logic out of existing code, migrate one caller at a time and verify before the next.
 - In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.
 
+**When the structure is non-trivial — several modules, a real data or control flow, or a state machine — add a diagram so it's graspable at a glance.** Use Mermaid (it renders on GitHub, where plans get committed); for a simple file layout a plain ASCII tree in a code block is enough. Skip it when the plan touches a handful of obvious files — diagramming the obvious is noise.
+
+```mermaid
+flowchart LR
+  CLI[cli.py] --> Parser[parser.py]
+  Parser --> Validator[validator.py]
+  Validator --> Store[(store.py)]
+```
+
 This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
 
 ## Bite-Sized Task Granularity
