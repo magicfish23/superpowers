@@ -82,7 +82,7 @@ Rules:
 Print the title and body as **copy-pasteable fenced markdown blocks**. Do **not** run `gh pr create` or push unless the user explicitly asks.
 
 - If a write-up was all that was asked for: offer the next step — "want me to push and open the PR?" — which `superpowers:finishing-a-development-branch` handles (it owns push, create, and worktree cleanup).
-- If the user explicitly asked to push and open the PR: hand the push/create lifecycle to **superpowers:finishing-a-development-branch** rather than calling `gh` yourself. (If that skill invoked you just for the write-up, return the title and body and stop — it already owns the creation; don't hand back.)
+- If the user explicitly asked to push and open the PR: hand the push/create lifecycle to **superpowers:finishing-a-development-branch** rather than calling `gh` yourself. **But if `finishing-a-development-branch` invoked you only for the write-up, return the title and body and stop — it already owns the creation; do not hand back** (handing back would ping-pong the two skills).
 
 ### 5. Refreshing an existing write-up (only when asked)
 
@@ -133,3 +133,4 @@ After — one line per chunk:
 - Tagging the title with `[claude]`/`[ai]`/`[wip]` or any tool/agent attribution → reviewer slop; name the change, not the author.
 - Naming a customer, user, email, or org in the description → PRs are usually public; describe the symptom and use an internal ticket ID.
 - Inventing an issue reference like `Fixes #XXXX` when no real ID exists → a false link is worse than none.
+- Handing back to `finishing-a-development-branch` when it only invoked you for the write-up → infinite ping-pong. Return the title and body and stop.
