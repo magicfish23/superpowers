@@ -79,7 +79,10 @@ Rules:
 
 ### 4. Output
 
-Print the title and body as **copy-pasteable fenced markdown blocks**. Do **not** run `gh pr create` or push unless the user explicitly asks. Offer it as a follow-up.
+Print the title and body as **copy-pasteable fenced markdown blocks**. Do **not** run `gh pr create` or push unless the user explicitly asks.
+
+- If a write-up was all that was asked for: offer the next step — "want me to push and open the PR?" — which `superpowers:finishing-a-development-branch` handles (it owns push, create, and worktree cleanup).
+- If the user explicitly asked to push and open the PR: hand the push/create lifecycle to **superpowers:finishing-a-development-branch** rather than calling `gh` yourself. (If that skill invoked you just for the write-up, return the title and body and stop — it already owns the creation; don't hand back.)
 
 ### 5. Refreshing an existing write-up (only when asked)
 

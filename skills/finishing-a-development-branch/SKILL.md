@@ -123,14 +123,13 @@ git branch -d <feature-branch>
 ```bash
 # Push branch
 git push -u origin <feature-branch>
+```
 
-# Create PR
-gh pr create --title "<title>" --body "$(cat <<'EOF'
-## Summary
-<2-3 bullets of what changed>
+Generate the title and body with **REQUIRED SUB-SKILL: superpowers:writing-pr** — it reads the actual diff and produces a structured title and body. Then create the PR with that content:
 
-## Test Plan
-- [ ] <verification steps>
+```bash
+gh pr create --title "<title from writing-pr>" --body "$(cat <<'EOF'
+<body from writing-pr>
 EOF
 )"
 ```
@@ -139,7 +138,11 @@ EOF
 
 #### Option 3: Keep As-Is
 
-Report: "Keeping branch <name>. Worktree preserved at <path>."
+The user is integrating later, so prepare the write-up they'll need now:
+
+- **REQUIRED SUB-SKILL: superpowers:writing-pr** — generate the PR title and body from the diff and print them copy-pasteable. Do **not** push or create the PR; the user chose to keep the branch as-is.
+
+Report: "Keeping branch <name>. Worktree preserved at <path>. PR title and description are ready above for when you open it."
 
 **Don't cleanup worktree.**
 
