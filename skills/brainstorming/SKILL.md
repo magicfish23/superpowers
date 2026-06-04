@@ -112,6 +112,8 @@ digraph brainstorming {
 - Write the validated design (spec) to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`
   - (User preferences for spec location override this default)
 - Use elements-of-style:writing-clearly-and-concisely skill if available
+- When the design has non-trivial architecture, data flow, or state transitions, include a diagram in the spec so the structure is graspable at a glance. Use Mermaid (it renders on GitHub); a small ASCII sketch is fine when that's all it needs. Skip it for an obvious one- or two-component design — diagramming the obvious is noise.
+- If you used the Visual Companion, capture the chosen mockup in the spec — embed the screenshot or link the saved `.superpowers/brainstorm/…` HTML — so the visual decision is recorded, not lost when the server stops.
 - Commit the design document to git
 
 **Spec Self-Review:**
