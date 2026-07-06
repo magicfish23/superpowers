@@ -79,7 +79,9 @@ Rules:
 
 ### 4. Output
 
-Print the title and body as **copy-pasteable fenced markdown blocks**. Do **not** run `gh pr create` or push unless the user explicitly asks.
+Print the title and body as **copy-pasteable fenced markdown blocks** — the title in its own block, the body in a separate one. Do **not** run `gh pr create` or push unless the user explicitly asks.
+
+**Critical — fence the body with MORE backticks than anything inside it.** The body almost always contains fenced code blocks (the before/after snippets, the `mermaid` diagram), so wrapping it in a normal three-backtick fence silently breaks: the first inner fence closes the outer block early and the rest of the body spills out as raw text. Count the longest backtick run the body uses (usually three) and open **and** close the body with at least one more — normally a **four-backtick** fence (step to five if an inner block uses four). After writing it, re-read your output and confirm the closing fence sits at the very end, after the Test plan, with nothing leaking out below it.
 
 - If a write-up was all that was asked for: offer the next step — "want me to push and open the PR?" — which `superpowers:finishing-a-development-branch` handles (it owns push, create, and worktree cleanup).
 - If the user explicitly asked to push and open the PR: hand the push/create lifecycle to **superpowers:finishing-a-development-branch** rather than calling `gh` yourself. **But if `finishing-a-development-branch` invoked you only for the write-up, return the title and body and stop — it already owns the creation; do not hand back** (handing back would ping-pong the two skills).
@@ -134,3 +136,4 @@ After — one line per chunk:
 - Naming a customer, user, email, or org in the description → PRs are usually public; describe the symptom and use an internal ticket ID.
 - Inventing an issue reference like `Fixes #XXXX` when no real ID exists → a false link is worse than none.
 - Handing back to `finishing-a-development-branch` when it only invoked you for the write-up → infinite ping-pong. Return the title and body and stop.
+- Wrapping a body that contains code fences in a same-width three-backtick block → it breaks at the first inner fence and the rest spills out as raw text. The outer fence must be wider (four backticks).
