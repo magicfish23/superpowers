@@ -26,6 +26,7 @@ If the spec covers multiple independent subsystems, it should have been broken i
 
 Before defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.
 
+- **If a graphify knowledge graph exists (`graphify-out/graph.json`), consult it first to scope the change.** `graphify query "<the feature/area>"` surfaces the files and components involved, and `graphify explain "<component>"` / `graphify path "A" "B"` reveal what depends on them — so the "which files does this touch, and what breaks if I change them" mapping is grounded in the real structure rather than guessed. When there is no `graphify-out/`, explore the codebase directly as usual.
 - Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.
 - You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.
 - Files that change together should live together. Split by responsibility, not by technical layer.

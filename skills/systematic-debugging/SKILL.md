@@ -119,6 +119,8 @@ You MUST complete each phase before proceeding to the next.
    - Keep tracing up until you find the source
    - Fix at source, not at symptom
 
+   **If a graphify knowledge graph exists (`graphify-out/graph.json`), use it to trace faster:** `graphify path "<symptom site>" "<suspected source>"` surfaces the call/dependency chain between two points, and `graphify explain "<node>"` lists a component's callers and callees — turning the backward walk into a lookup instead of a manual grep. Fall back to manual tracing when there is no graph.
+
 ### Phase 2: Pattern Analysis
 
 **Find the pattern before fixing:**
@@ -141,6 +143,7 @@ You MUST complete each phase before proceeding to the next.
    - What other components does this need?
    - What settings, config, environment?
    - What assumptions does it make?
+   - If `graphify-out/` exists, `graphify explain "<component>"` lists its dependencies and dependents directly, instead of grepping for each one.
 
 ### Phase 3: Hypothesis and Testing
 
