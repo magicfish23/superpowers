@@ -30,6 +30,12 @@ Task tool (general-purpose):
     git diff {BASE_SHA}..{HEAD_SHA}
     ```
 
+    **Blast radius (if a graphify knowledge graph exists):** when `graphify-out/graph.json`
+    is present, run `graphify explain "<changed symbol>"` to see what calls the changed code
+    and `graphify path "A" "B"` to trace how two touched areas connect. This tells you what
+    *else* the diff can affect — callers and dependents that aren't in the diff itself. Skip
+    this if there is no `graphify-out/`.
+
     ## What to Check
 
     **Plan alignment:**
